@@ -1,10 +1,13 @@
 package String;
 
+import java.util.Stack;
+
 public class SimpleQues {
     static void main(String[] args) {
-        System.out.println(skip2( "baccad"));
-        System.out.println(skipApple("bcappledeap"));
-        System.out.println(skipApp("abcappleappde"));
+//        System.out.println(skip2( "baccad"));
+//        System.out.println(skipApple("bcappledeap"));
+//        System.out.println(skipApp("abcappleappde"));
+        System.out.println(reverseParentheses("(abc(def)gh)"));
     }
     static void skip(String  ans, String str ){
         if(str.isEmpty()){
@@ -51,5 +54,24 @@ public class SimpleQues {
         }else{
             return  str.charAt(0) + skipApp(str.substring(1));
         }
+    }
+    public static String reverseParentheses(String s) {
+        Stack<StringBuilder> stack = new Stack<>();
+        StringBuilder current = new StringBuilder();
+
+        for (char ch : s.toCharArray()) {
+            if (ch == '(') {
+                stack.push(current);
+                current = new StringBuilder();
+            } else if (ch == ')') {
+                current.reverse();
+                StringBuilder previous = stack.pop();
+                previous.append(current);
+                current = previous;
+            } else {
+                current.append(ch);
+            }
+        }
+        return current.toString();
     }
 }
