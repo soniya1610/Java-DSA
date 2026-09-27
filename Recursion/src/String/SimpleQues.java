@@ -3,6 +3,8 @@ package String;
 public class SimpleQues {
     static void main(String[] args) {
         System.out.println(skip2( "baccad"));
+        System.out.println(skipApple("bcappledeap"));
+        System.out.println(skipApp("abcappleappde"));
     }
     static void skip(String  ans, String str ){
         if(str.isEmpty()){
@@ -26,6 +28,28 @@ public class SimpleQues {
             return skip2(str.substring(1));
         }else{
             return ch + skip2(str.substring(1));
+        }
+    }
+    // skip apple
+    static String skipApple( String str){
+        if(str.isEmpty()){
+            return "";
+        }
+        if(str.startsWith("apple")){
+            return skipApple(str.substring(5));
+        }else{
+            return  str.charAt(0) + skipApple(str.substring(1));
+        }
+    }
+    // skip app not apple
+    static String skipApp( String str){
+        if(str.isEmpty()){
+            return "";
+        }
+        if(str.startsWith("app") && !str.startsWith("apple")){
+            return skipApp(str.substring(3));
+        }else{
+            return  str.charAt(0) + skipApp(str.substring(1));
         }
     }
 }
